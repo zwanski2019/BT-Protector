@@ -1,0 +1,132 @@
+# Bluetooth Attack Detection System Configuration
+# config.json
+
+{
+  "detection_settings": {
+    "interface": "hci0",
+    "alert_threshold": 3,
+    "scan_interval": 10,
+    "log_level": "INFO"
+  },
+  
+  "detection_rules": {
+    "knob_detection": {
+      "enabled": true,
+      "min_key_length": 7,
+      "alert_level": "CRITICAL",
+      "description": "Detects Key Negotiation of Bluetooth attacks"
+    },
+    
+    "bias_detection": {
+      "enabled": true,
+      "max_reconnect_time": 5,
+      "alert_level": "CRITICAL",
+      "description": "Detects Bluetooth Impersonation AttackS"
+    },
+    
+    "braktooth_detection": {
+      "enabled": true,
+      "malformed_packet_threshold": 5,
+      "alert_level": "HIGH",
+      "description": "Detects BrakTooth firmware exploits"
+    },
+    
+    "blueborne_detection": {
+      "enabled": true,
+      "oversized_packet_threshold": 500,
+      "alert_level": "CRITICAL",
+      "description": "Detects BlueBorne remote code execution attempts"
+    },
+    
+    "pairing_flood": {
+      "enabled": true,
+      "max_pairing_requests": 10,
+      "time_window": 60,
+      "alert_level": "HIGH",
+      "description": "Detects pairing request flooding"
+    },
+    
+    "rssi_anomaly": {
+      "enabled": true,
+      "rssi_jump_threshold": 30,
+      "alert_level": "MEDIUM",
+      "description": "Detects sudden RSSI changes (potential relay attack)"
+    },
+    
+    "gatt_overflow": {
+      "enabled": true,
+      "max_attribute_length": 512,
+      "alert_level": "HIGH",
+      "description": "Detects GATT buffer overflow attempts"
+    },
+    
+    "device_spoofing": {
+      "enabled": true,
+      "check_oui": true,
+      "alert_level": "MEDIUM",
+      "description": "Detects MAC address spoofing attempts"
+    }
+  },
+  
+  "alerting": {
+    "console_alerts": true,
+    "log_file_alerts": true,
+    "email_alerts": false,
+    "email_config": {
+      "smtp_server": "smtp.example.com",
+      "smtp_port": 587,
+      "from_address": "alerts@example.com",
+      "to_addresses": ["security@example.com"],
+      "use_tls": true
+    },
+    "webhook_alerts": false,
+    "webhook_url": "https://example.com/webhook"
+  },
+  
+  "reporting": {
+    "auto_generate_reports": true,
+    "report_interval": 3600,
+    "report_format": "json",
+    "report_directory": "./reports/",
+    "include_pcap": false
+  },
+  
+  "whitelisting": {
+    "enabled": false,
+    "whitelisted_devices": [
+      {
+        "mac": "00:11:22:33:44:55",
+        "name": "Trusted Device 1",
+        "reason": "Company laptop"
+      }
+    ]
+  },
+  
+  "blacklisting": {
+    "enabled": false,
+    "blacklisted_devices": [
+      {
+        "mac": "AA:BB:CC:DD:EE:FF",
+        "reason": "Known malicious device"
+      }
+    ]
+  },
+  
+  "vulnerability_database": {
+    "auto_update": true,
+    "update_interval": 86400,
+    "sources": [
+      "https://nvd.nist.gov/feeds/json/cve/1.1/",
+      "https://bluetooth.com/security-bulletins/"
+    ]
+  },
+  
+  "advanced": {
+    "packet_capture": false,
+    "pcap_directory": "./captures/",
+    "max_pcap_size": 1073741824,
+    "deep_packet_inspection": true,
+    "machine_learning": false,
+    "ml_model_path": "./models/bluetooth_anomaly_detection.h5"
+  }
+}

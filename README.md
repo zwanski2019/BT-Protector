@@ -1,235 +1,370 @@
-# 🛡️ Bluetooth Security Monitor
+# Bluetooth Attack Detection System
+## Blue Team Defense Framework
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](YOUR_APP_URL_HERE)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+A comprehensive security monitoring tool designed to detect and alert on various Bluetooth attacks including KNOB, BIAS, BrakTooth, BlueBorne, and others.
 
-A comprehensive web-based Bluetooth attack detection and monitoring system designed for blue team defensive security operations.
+## 🎯 Purpose
 
-![Bluetooth Security Monitor](https://img.icons8.com/color/200/000000/bluetooth.png)
+This tool is designed for **defensive security (Blue Team)** purposes:
+- Monitor Bluetooth environments for attacks
+- Detect vulnerable devices
+- Alert on suspicious activity
+- Generate security reports
+- Support incident response
 
-## 🎯 Overview
+## 🚀 Features
 
-The Bluetooth Security Monitor is an educational and defensive security tool that helps identify and analyze Bluetooth security threats in real-time. Built with Streamlit, it provides an intuitive web interface for monitoring Bluetooth environments, detecting attacks, and generating security reports.
+### Attack Detection Capabilities
 
-## ✨ Features
+1. **KNOB Attack Detection**
+   - Monitors encryption key negotiation
+   - Alerts on downgraded key lengths
+   - Detects forced weak encryption
 
-### 🔍 Real-Time Monitoring
-- Continuous Bluetooth device discovery
-- Live threat detection and alerting
-- Interactive dashboard with metrics
-- Device profiling and tracking
+2. **BIAS Attack Detection**
+   - Tracks reconnection patterns
+   - Identifies authentication bypasses
+   - Monitors role switches
 
-### ⚠️ Attack Detection
-- **KNOB Attack** - Key negotiation downgrade detection
-- **BIAS Attack** - Bluetooth impersonation detection
-- **BrakTooth** - Firmware exploitation attempts
-- **BlueBorne** - Remote code execution attempts
-- **GATT Overflow** - Buffer overflow detection
-- **Pairing Flood** - DoS attack detection
-- **RSSI Anomaly** - Relay attack indicators
+3. **BrakTooth Detection**
+   - Identifies malformed LMP packets
+   - Detects firmware exploitation attempts
+   - Monitors for DoS patterns
 
-### 📊 Analytics & Reporting
-- Real-time threat visualization
-- Device manufacturer analysis
-- Signal strength monitoring
-- Threat timeline tracking
-- Exportable security reports
+4. **GATT Overflow Detection**
+   - Monitors attribute write sizes
+   - Detects buffer overflow attempts
+   - Tracks unusual GATT operations
 
-### 📚 Knowledge Base
-- Comprehensive attack descriptions
-- CVE database
-- Security best practices
-- Mitigation recommendations
+5. **Pairing Flood Detection**
+   - Counts pairing requests
+   - Identifies flooding attempts
+   - Alerts on suspicious pairing patterns
 
-## 🚀 Live Demo
+6. **RSSI Anomaly Detection**
+   - Tracks signal strength changes
+   - Detects potential relay attacks
+   - Identifies spoofing attempts
 
-**[Try the Live Demo →](YOUR_APP_URL_HERE)**
+### Monitoring Features
 
-*Note: The demo uses simulated data for educational purposes.*
+- **Real-time Device Discovery**: Continuously scans for nearby Bluetooth devices
+- **Device Profiling**: Builds profiles of discovered devices including manufacturer, vulnerabilities
+- **Connection Monitoring**: Tracks connection patterns and anomalies
+- **Packet Analysis**: Deep inspection of Bluetooth packets for attack signatures
+- **Automated Reporting**: Generates comprehensive security reports
 
-## 💻 Local Installation
+## 📋 Requirements
 
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
+### System Requirements
+- Linux system with Bluetooth hardware
+- Python 3.8+
+- Root/sudo access for packet capture
 
-### Setup
-
-1. **Clone the repository**
+### Python Dependencies
 ```bash
-git clone https://github.com/YOUR_USERNAME/bluetooth-security-monitor.git
-cd bluetooth-security-monitor
+pip install pybluez scapy
 ```
 
-2. **Install dependencies**
+### System Tools
+```bash
+# Debian/Ubuntu
+sudo apt-get install bluez bluez-tools libbluetooth-dev
+
+# Fedora/RHEL
+sudo dnf install bluez bluez-tools bluez-libs-devel
+```
+
+## 🔧 Installation
+
+1. **Clone or download the tools**:
+```bash
+chmod +x bluetooth_attack_detector.py
+chmod +x bluetooth_packet_analyzer.py
+```
+
+2. **Install dependencies**:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Run the application**
+3. **Verify Bluetooth interface**:
 ```bash
-streamlit run streamlit_app.py
+hciconfig
 ```
-
-4. **Open your browser**
-```
-Navigate to http://localhost:8501
-```
-
-## 📦 Deployment
-
-### Deploy to Streamlit Cloud
-
-1. Fork this repository
-2. Sign up at [Streamlit Cloud](https://streamlit.io/cloud)
-3. Connect your GitHub account
-4. Select this repository
-5. Click "Deploy!"
-
-**[Detailed Deployment Guide →](DEPLOYMENT_GUIDE.md)**
-
-## 🛠️ Technology Stack
-
-- **Frontend:** Streamlit
-- **Visualization:** Plotly
-- **Data Processing:** Pandas, NumPy
-- **Styling:** Custom CSS
-- **Deployment:** Streamlit Cloud
 
 ## 📖 Usage
 
-### Dashboard View
-- Monitor real-time device discoveries
-- View active threats and alerts
-- Track security metrics
+### Basic Monitoring
 
-### Device Analysis
-- Inspect detected Bluetooth devices
-- Review vulnerability information
-- Filter by threat level
+Start basic monitoring with default settings:
+```bash
+sudo python3 bluetooth_attack_detector.py
+```
 
-### Threat Management
-- Analyze detected attacks
-- View confidence scores
-- Get mitigation recommendations
+### Advanced Options
 
-### Analytics
-- Visualize attack patterns
-- Analyze device distribution
-- Track threat timelines
+Monitor specific interface:
+```bash
+sudo python3 bluetooth_attack_detector.py -i hci0
+```
 
-## 🔐 Security & Privacy
+Enable verbose logging:
+```bash
+sudo python3 bluetooth_attack_detector.py -v
+```
 
-### Educational Purpose
-This tool is designed for:
-- ✅ Educational demonstrations
-- ✅ Security awareness training
-- ✅ Defensive security research
-- ✅ Blue team operations
+Set custom alert threshold:
+```bash
+sudo python3 bluetooth_attack_detector.py -t 5
+```
 
-### Not Intended For:
-- ❌ Unauthorized device monitoring
-- ❌ Offensive security operations
-- ❌ Privacy violations
-- ❌ Malicious purposes
+### Packet Analysis
 
-### Data Privacy
-- Demo mode uses simulated data
-- No real device scanning in web version
-- No data collection or storage
-- Open source and transparent
+For deep packet inspection:
+```bash
+sudo python3 bluetooth_packet_analyzer.py
+```
 
-## 📋 Features Roadmap
+## 📊 Output and Reports
 
-- [ ] Real device integration (local deployment)
-- [ ] Machine learning threat detection
-- [ ] Email/SMS alerting
-- [ ] Multi-language support
-- [ ] Mobile responsive design
-- [ ] API integration
-- [ ] Historical trend analysis
-- [ ] Custom detection rules
+### Real-time Alerts
+
+The tool provides real-time alerts when threats are detected:
+```
+2026-02-03 10:15:23 - WARNING - THREAT DETECTED: KNOB [CRITICAL] 
+from 00:1A:7D:DA:71:13 (Confidence: 95%) - {'key_length': 1}
+```
+
+### Security Reports
+
+After monitoring, a comprehensive JSON report is generated:
+```json
+{
+  "scan_summary": {
+    "start_time": "2026-02-03T10:00:00",
+    "end_time": "2026-02-03T11:00:00",
+    "devices_detected": 15,
+    "threats_found": 3
+  },
+  "devices": [...],
+  "threats": [...],
+  "recommendations": [...]
+}
+```
+
+### Log Files
+
+All activity is logged to:
+- `bluetooth_detector.log` - Main detection log
+- `bluetooth_security_report_YYYYMMDD_HHMMSS.json` - Security report
+
+## 🛡️ Detection Rules
+
+### Configurable Thresholds
+
+The tool includes configurable detection rules:
+
+```python
+detection_rules = {
+    'knob_detection': {
+        'min_key_length': 7  # Alert if key < 7 bytes
+    },
+    'bias_detection': {
+        'max_reconnect_time': 5  # Alert if reconnect < 5 seconds
+    },
+    'pairing_flood': {
+        'max_pairing_requests': 10,
+        'time_window': 60  # 10 requests in 60 seconds
+    },
+    'rssi_anomaly': {
+        'rssi_jump_threshold': 30  # Alert on 30dBm changes
+    }
+}
+```
+
+## 🔍 Attack Signatures
+
+### KNOB (Key Negotiation of Bluetooth)
+- **Detection**: Monitors encryption key size negotiation
+- **Indicator**: Key length < 7 bytes
+- **Severity**: CRITICAL
+
+### BIAS (Bluetooth Impersonation AttackS)
+- **Detection**: Tracks reconnection timing and authentication
+- **Indicator**: Rapid reconnection without authentication
+- **Severity**: CRITICAL
+
+### BrakTooth
+- **Detection**: Identifies malformed LMP packets
+- **Indicator**: Unusual packet structures, invalid opcodes
+- **Severity**: HIGH
+
+### BlueBorne
+- **Detection**: Monitors L2CAP/SDP for exploits
+- **Indicator**: Oversized SDP/BNEP packets
+- **Severity**: CRITICAL
+
+### GATT Overflow
+- **Detection**: Checks attribute write sizes
+- **Indicator**: Attributes > 512 bytes
+- **Severity**: HIGH
+
+## 📈 Use Cases
+
+### 1. Security Auditing
+```bash
+# Run 1-hour security audit
+sudo python3 bluetooth_attack_detector.py -v -t 3
+# Review generated report
+cat bluetooth_security_report_*.json
+```
+
+### 2. Continuous Monitoring
+```bash
+# Run as background service
+sudo nohup python3 bluetooth_attack_detector.py > /dev/null 2>&1 &
+# Monitor logs
+tail -f bluetooth_detector.log
+```
+
+### 3. Incident Response
+```bash
+# Enable verbose mode for detailed forensics
+sudo python3 bluetooth_attack_detector.py -v
+# Analyze specific timeframe in logs
+grep "THREAT DETECTED" bluetooth_detector.log
+```
+
+### 4. Vulnerability Assessment
+```bash
+# Scan for vulnerable devices
+sudo python3 bluetooth_attack_detector.py
+# Review device vulnerabilities in report
+jq '.devices[] | select(.known_vulnerabilities != [])' report.json
+```
+
+## 🔐 Security Best Practices
+
+### For Defenders
+
+1. **Regular Monitoring**: Run periodic scans of your environment
+2. **Update Firmware**: Keep all Bluetooth devices updated
+3. **Disable When Not Needed**: Turn off Bluetooth when not in use
+4. **Use Strong Pairing**: Implement secure pairing methods
+5. **Limit Discoverability**: Only enable discoverable mode when pairing
+
+### Recommendations from Reports
+
+The tool automatically generates recommendations based on findings:
+- Firmware update suggestions for vulnerable devices
+- Configuration changes to mitigate detected attacks
+- Best practices for specific threat scenarios
+
+## 🧪 Testing
+
+### Test Detection Rules
+
+The tool includes test functionality:
+
+```python
+# Test KNOB detection
+detector.detect_knob_attack(
+    encryption_key_length=1,
+    device_mac="00:11:22:33:44:55"
+)
+
+# Test GATT overflow detection
+detector.detect_gatt_overflow(
+    attribute_length=1024,
+    device_mac="00:11:22:33:44:55"
+)
+```
+
+## 📚 Technical Details
+
+### Architecture
+
+```
+bluetooth_attack_detector.py
+├── BluetoothAttackDetector (Main detection engine)
+│   ├── Device Monitoring Thread
+│   ├── Connection Analysis Thread
+│   ├── Pairing Monitoring Thread
+│   └── Detection Rules Engine
+│
+bluetooth_packet_analyzer.py
+├── BluetoothPacketAnalyzer (Packet inspection)
+│   ├── ACL Packet Analysis
+│   ├── Event Packet Analysis
+│   ├── Command Packet Analysis
+│   └── Attack Signature Detection
+```
+
+### Threat Scoring
+
+Threats are scored on multiple factors:
+- **Threat Level**: LOW, MEDIUM, HIGH, CRITICAL
+- **Confidence**: 0.0 to 1.0 based on signature match quality
+- **Device Context**: Known vulnerabilities, manufacturer, behavior history
+
+## 🚨 Limitations
+
+1. **Requires Root Access**: Packet capture needs elevated privileges
+2. **Linux Only**: Currently optimized for Linux systems
+3. **Hardware Dependent**: Requires compatible Bluetooth adapter
+4. **False Positives**: Some legitimate traffic may trigger alerts
+5. **Passive Detection**: Cannot prevent attacks, only detect them
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+This is a blue team defense tool. Contributions should focus on:
+- Improving detection accuracy
+- Adding new attack signatures
+- Reducing false positives
+- Better reporting capabilities
+- Performance optimizations
 
-### How to Contribute
+## ⚖️ Legal Notice
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+**FOR DEFENSIVE SECURITY USE ONLY**
 
-### Contribution Guidelines
+This tool is designed for:
+- ✅ Monitoring your own network
+- ✅ Security auditing with permission
+- ✅ Educational purposes in controlled environments
+- ✅ Incident response and forensics
 
-- Focus on defensive security features
-- Maintain educational purpose
-- Add documentation for new features
-- Follow Python PEP 8 style guide
-- Test thoroughly before submitting
+Do NOT use for:
+- ❌ Unauthorized monitoring of others' devices
+- ❌ Attacking or exploiting systems
+- ❌ Any illegal or unethical purposes
+
+**Users are responsible for ensuring compliance with all applicable laws and regulations.**
+
+## 📞 Support
+
+For issues, questions, or contributions:
+- Check logs in `bluetooth_detector.log`
+- Review generated security reports
+- Ensure all dependencies are installed
+- Verify Bluetooth hardware compatibility
+
+## 🔄 Version History
+
+### v1.0 (Current)
+- Initial release
+- Support for KNOB, BIAS, BrakTooth, BlueBorne detection
+- Real-time monitoring and reporting
+- Comprehensive packet analysis
+- Automated security recommendations
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## ⚠️ Disclaimer
-
-**IMPORTANT:** This tool is provided for educational and defensive security purposes only. Users are responsible for ensuring compliance with all applicable laws and regulations. The authors and contributors are not responsible for any misuse or damage caused by this tool.
-
-- Only monitor devices and networks you own or have explicit permission to test
-- Respect privacy and legal boundaries
-- Use responsibly and ethically
-
-## 🙏 Acknowledgments
-
-- Streamlit team for the amazing framework
-- Security researchers who discovered these vulnerabilities
-- Open source community
-- Blue team defenders worldwide
-
-## 📞 Contact & Support
-
-- **Issues:** [GitHub Issues](https://github.com/YOUR_USERNAME/bluetooth-security-monitor/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/YOUR_USERNAME/bluetooth-security-monitor/discussions)
-- **Email:** your.email@example.com
-
-## 🌟 Show Your Support
-
-If you find this project useful:
-- ⭐ Star this repository
-- 🐛 Report bugs and issues
-- 💡 Suggest new features
-- 📢 Share with others
-- 🤝 Contribute code
-
-## 📚 Additional Resources
-
-### Learn More About Bluetooth Security
-- [NIST Bluetooth Security Guide](https://csrc.nist.gov/publications)
-- [Bluetooth SIG Security Updates](https://www.bluetooth.com/learn-about-bluetooth/bluetooth-technology/security/)
-- [OWASP Mobile Security](https://owasp.org/www-project-mobile-security/)
-
-### Related Projects
-- [Bluetooth Security Tools on GitHub](https://github.com/topics/bluetooth-security)
-- [Awesome Bluetooth Security](https://github.com/topics/bluetooth)
+This tool is provided for educational and defensive security purposes.
+Use responsibly and ethically.
 
 ---
 
-**Made with ❤️ for the security community**
-
-**Educational • Defensive • Open Source**
-
----
-
-## 🏆 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/bluetooth-security-monitor?style=social)
-![GitHub forks](https://img.shields.io/github/forks/YOUR_USERNAME/bluetooth-security-monitor?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/YOUR_USERNAME/bluetooth-security-monitor?style=social)
-
-**Version:** 1.0  
-**Last Updated:** February 2026  
-**Status:** Active Development
+**Remember**: This is a DETECTION tool, not an ATTACK tool. 
+Use it to protect systems, not to compromise them.
